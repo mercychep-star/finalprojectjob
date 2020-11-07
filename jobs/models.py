@@ -7,6 +7,23 @@ from django.template.defaultfilters import slugify
 from blog_project import settings
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(default=None, editable=False)
+
+    def save(self,*args,**kwargs):
+        self.slug = slugify(self.title)
+        super(Category, self).save(*args,**kwargs)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = " All Categories"
+
+
+
+
 class Job(models.Model):
     title = models.CharField(max_length=300)
     company = models.CharField(max_length=300)
@@ -23,12 +40,13 @@ class Job(models.Model):
     publishing_date=models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(default=None,editable=False,)
     employer = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default=None)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1)
 
     def __str__(self):
         return self.title
     def save(self, *args,**kwargs):
         self.slug= slugify(self.title)
-        super(Job,self).save(*args,**args)
+        super(Job,self).save(*args,**kwargs)
     class Meta:
         ordering = ('-id',)
         verbose_name_plural= ('All Jobs')
