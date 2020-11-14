@@ -15,6 +15,10 @@ class Category(models.Model):
         self.slug = slugify(self.title)
         super(Category, self).save(*args,**kwargs)
 
+    def job_count(self):
+        return self.jobs.all().count()
+
+
     def __str__(self):
         return self.title
 
@@ -40,7 +44,7 @@ class Job(models.Model):
     publishing_date=models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(default=None,editable=False,)
     employer = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default=None)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,default=1, related_name="jobs")
 
     def __str__(self):
         return self.title
