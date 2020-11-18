@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jobs',
     'users',
+    'ckeditor',
+
 
 ]
 
@@ -132,3 +134,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
 MEDIA_URL = '/media/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/users/login'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar':'Basic',
+        'height': 300,
+        'width': 400,
+
+    },
+}
