@@ -47,7 +47,39 @@
 	          <li class="nav-item cta mr-md-2"><a href="{% url 'users:register'%}" class="nav-link">REGISTER</a></li>
 	          <li class="nav-item cta cta-colored"><a href="{% url 'users:login'%}" class="nav-link">LOGIN</a></li>
                 {% endif %}
+                {% if user.is_authenticated and user.is_employee %}
+                <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{user.first_name}}
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Add Job</a>
+                    <a class="dropdown-item" href="#">My Jobs</a>
+                    {% if user.get_profile_id%}
+                    <a class="dropdown-item" href="{% url 'users:update_profile' pk=user.get_profile_id %}">Update profile</a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{% url 'users:logout'%}">Logout</a>
+                  </div>
+                </div>
+                {% endif %}
+                {% if user.is_authenticated and user.is_employer %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user.first_name}}
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">my jobs</a>
+                    {% if user.get_profile_id%}
+                    <a class="dropdown-item" href="{% url 'users:update_profile' pk=user.get_profile_id %}">update profile</a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{% url 'users:logout'%}">logout</a>
 
+                  </div>
+                </div>
+                {% endif %}
+                {% if user.is_authenticated and user.is_superuser%}
+                <li class="nav-item cta mr-md-2"><a href="{% url 'users:logout'%}" class="nav-link">Logout</a></li>
+                {% endif%}
 	        </ul>
 	      </div>
 	    </div>

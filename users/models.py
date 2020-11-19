@@ -60,6 +60,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('user')
         verbose_name_plural = _('ALL USERS')
 
+    def get_profile_id(self):
+        return self.profiles.id
+
 
 class Profile(models.Model):
     user = models.OneToOneField(Account,on_delete=models.CASCADE,related_name="profiles")
