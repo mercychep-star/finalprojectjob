@@ -1,0 +1,23 @@
+
+    <section class="ftco-section ftco-counter">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+          	<span class="subheading">all {{category.title}} jobs available</span>
+            <h2 class="mb-4"><span>Current</span> Job Posts</h2>
+          </div>
+        </div>
+<<div class="row">
+            {% for category in categories %}
+        	<div class="col-md-3 ftco-animate">
+        		<ul class="category">
+
+        			<li><a href="#">{{category.title}}<span class="number" data-number={{category.job_count}}>0</span></a></li>
+        		</ul>
+        	</div>
+            {% endfor %}
+
+        </div>
+    	</div>
+    </section>
+    <span class="subheading">Recently Added Jobs</span>
