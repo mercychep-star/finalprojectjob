@@ -1,7 +1,7 @@
 #project Title
   
   >Job Portal
-#what it does
+# what it does
 * helps job seekers find job as per their preference,i.e fulltime,part-time,temporary,internship
 
 * it also allows them to choose the availble jobs as by the location of their preferences
@@ -10,7 +10,7 @@
 
 
 
-#Enviroment
+# Enviroment
 _install the following  as per your operating system:_
 
 * python 3.8.5 
