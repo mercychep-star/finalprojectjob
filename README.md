@@ -21,23 +21,23 @@ _install the following  as per your operating system:_
     (https://www.jetbrains.com/pycharm/download/#section=windows)
     
   
- * Django 3.1.2 or newer
+* Django 3.1.2 or newer
         
         ( type: pip install django on pycharm's terminal)
         
   
- * django-ckeditor 6.0.0
+* django-ckeditor 6.0.0
    
         ( type:pip install django-ckeditor on pycharm's terminal)
- * Pillow 7.2.0 
+* Pillow 7.2.0 
   
         ( type: pip install Pillow on pycharm's terminal)
         
         
-   * XAMPP server 7.2.29
+* XAMPP server 7.2.29
    
      (https://www.apachefriends.org/download.html)
-   * Mysqlclient
+* Mysqlclient
     
         (https://pypi.org/project/mysqlclient/)
  
