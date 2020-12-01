@@ -8,3 +8,9 @@ class CreateJobForm(forms.ModelForm):
         model=Job
         fields = ['title','company','location','job_type','category','description']
         widgets = {'job_type':forms.RadioSelect}
+
+
+class ApplyJobForm(forms.ModelForm):
+    class meta:
+        model=Job
+        fields=[]

@@ -20,6 +20,15 @@
           <div class="col-md-8 ftco-animate">
             <h2 class="mb-3">{{job.title}}</h2>
             <p>{{job.description|safe}}</p>
+            <hr>
+            {% if user.is_employee%}
+            {% csrf_token%}
+            <form method="post">
+             <input type="submit" value="Apply" class="btn btn-primary py-2 mr-1">
+
+            </form>
+
+            {% endif%}
 
 
           </div> <!-- .col-md-8 -->
