@@ -39,7 +39,7 @@ _install the following  as per your operating system:_
      (https://www.apachefriends.org/download.html)
 * Mysqlclient
     
-        (https://pypi.org/project/mysqlclient/)
+    (https://pypi.org/project/mysqlclient/)
  
          (type: pip install mysqlclient on pycharm's terminal)
   
