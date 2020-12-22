@@ -34,10 +34,10 @@ _install the following  as per your operating system:_
         ( type: pip install Pillow on pycharm's terminal)
         
         
-   * XAMPP server 7.2.29
+  * XAMPP server 7.2.29
    
      (https://www.apachefriends.org/download.html)
-   * Mysqlclient
+  * mysqlclient
     
         (https://pypi.org/project/mysqlclient/)
  

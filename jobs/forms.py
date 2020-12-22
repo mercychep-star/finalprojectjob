@@ -11,6 +11,6 @@ class CreateJobForm(forms.ModelForm):
 
 
 class ApplyJobForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model=Job
         fields=[]
