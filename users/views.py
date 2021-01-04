@@ -7,10 +7,10 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 
 from users.forms import AccountRegisterForm, UserUpdateForm
-from users.models import Profile
+from users.models import Profile, Account
 
 
 class UserRegisterView(SuccessMessageMixin,CreateView):
@@ -55,4 +55,14 @@ class UserUpdateView(SuccessMessageMixin,UpdateView):
 
     def get_success_url(self):
         return reverse('users:update',kwargs={'pk':self.object.pk})
+
+class EmployeeProfileView(DetailView):
+    template_name = 'users/employee-profile.html'
+    model = Account
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeProfileView,self).get_context_data(**kwargs)
+        context['account'] = Account.objects.get(pk=self.kwargs['pk'])
+        context['profile'] = Profile.objects.get(user_id=self.kwargs['pk'])
+        return context
 

@@ -41,7 +41,7 @@
                   {% endif%}
 
             </form>
-              {% if user.is_employer  %}
+              {% if user.is_employer and user.id == employer_id  %}
               {% if applied_employees%}
               <div class="list-group">
               <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
@@ -49,7 +49,7 @@
               </button>
 
                {% for employee in applied_employees %}
-               <a href="#" class="list-group-item list-group-item-action">{{employee.first_name}}</a>
+               <a href="{% url 'users:employee_profile' pk=employee.pk %}" class="list-group-item list-group-item-action">{{employee.first_name}}  {{ employee.last_name}}</a>
                 {% endfor %}
 
                  </div>

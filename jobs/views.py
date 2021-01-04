@@ -15,7 +15,7 @@ class HomeView(ListView):
     template_name = 'jobs/index.html'
     context_object_name = 'jobs'
     model = Job
-    paginate_by = 1
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -51,6 +51,7 @@ class SingleJobView(SuccessMessageMixin,UpdateView):
         context['employee_applied']=Job.objects.get(pk=self.kwargs['pk']).employee.all().filter(id=self.request.user.id)
         try:
             context['applied_employees'] = Job.objects.get(pk=self.kwargs['pk'],employer_id=self.request.user.id).employee.all()
+            context['employer_id'] = Job.objects.get(pk=self.kwargs['pk']).employer_id
         except:
             pass
         return context
