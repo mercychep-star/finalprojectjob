@@ -7,8 +7,9 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
+from jobs.models import Category, Job
 from users.forms import AccountRegisterForm, UserUpdateForm
 from users.models import Profile, Account
 
@@ -64,5 +65,18 @@ class EmployeeProfileView(DetailView):
         context = super(EmployeeProfileView,self).get_context_data(**kwargs)
         context['account'] = Account.objects.get(pk=self.kwargs['pk'])
         context['profile'] = Profile.objects.get(user_id=self.kwargs['pk'])
+        context['categories'] = Category.objects.all()
         return context
+
+@method_decorator(login_required(login_url='/users/login'),name='dispatch')
+class EmployerPostedJobsView(ListView):
+    template_name = "users/employer-posted-jobs.html"
+    context_object_name = 'employer_jobs'
+    model = Job
+    paginate_by = 3
+
+    def get_queryset(self):
+        return Job.objects.filter(employer=self.request.user).order_by('-id')
+
+
 
