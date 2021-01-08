@@ -7,6 +7,8 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
 
+from jobs.models import Job
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -96,6 +98,19 @@ def create_user_profile(sender,instance,created,**kwargs):
         Profile.objects.create(user=instance)
 
 post_save.connect(create_user_profile,sender=Account)
+
+class Invite(models.Model):
+    user = models.ForeignKey(Account,on_delete=models.CASCADE, related_name="invites")
+    job = models.ForeignKey(Job,on_delete=models.CASCADE,related_name="invites")
+    date = models.DateField(default=None,blank=True,null=True)
+    message = RichTextField(blank=True)
+    unread = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Invites"
+
+
+
 
 
 
