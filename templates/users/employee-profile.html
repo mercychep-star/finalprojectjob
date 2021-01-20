@@ -26,6 +26,34 @@
 
             <p>{{profile.resume|safe}}</p>
             <hr>
+            <h3>send an invitation to employee</h3>
+            <form action="" method="post">
+                {% csrf_token %}
+              <div class="row form-group">
+                         <div class="col-md-12"><h3>date</h3></div>
+                         <div class="col-md-12 mb-3 mb-md-0">
+                             <label for="option-job-type-1">
+                                 {{ form.date }}
+
+                             </label>
+                         </div>
+                     </div>
+              <div class="row form-group">
+                         <div class="col-md-12"><h3> message</h3></div>
+                <div class="col-md-12 mb-3 mb-md-0">
+                             <label for="option-job-type-1">
+                         {{form.media}}
+                         {{ form.message}}
+                               </label>
+                         </div>
+                     </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit"style="margin-left:270px" value="invite" class="btn btn-primary  py-2 px-5">
+                </div>
+              </div>
+
+            </form>
 
 
 

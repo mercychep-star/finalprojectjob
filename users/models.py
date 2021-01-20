@@ -65,6 +65,12 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def get_profile_id(self):
         return self.profiles.id
 
+    def count_unread_messages(self):
+        return self.invites.filter(unread=True).count()
+
+    def unread_messages(self):
+        return self.invites.filter(unread=True).values_list('job_id',flat=True)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(Account,on_delete=models.CASCADE,related_name="profiles")
@@ -73,6 +79,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=20,blank=True)
     resume = RichTextField(blank=True)
     company = models.CharField(max_length=200,blank=True)
+    wish_list = models.ManyToManyField(Job,default=None,blank=True,related_name="wish_list")
 
     def __str__(self):
         return self.user.first_name + " "+ self.user.last_name+ " "+ self.user.email
@@ -108,6 +115,9 @@ class Invite(models.Model):
 
     class Meta:
         verbose_name_plural = "Invites"
+
+    def __str__(self):
+        return self.job.title
 
 
 

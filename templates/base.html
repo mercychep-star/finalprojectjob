@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{% static "css/flaticon.css"  %}">
     <link rel="stylesheet" href="{% static "css/icomoon.css"  %}">
     <link rel="stylesheet" href="{% static "css/style.css"  %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
   </head>
   <body>
 
@@ -53,10 +55,16 @@
                       {{user.first_name}}
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Add Job</a>
-                    <a class="dropdown-item" href="#">My Jobs</a>
+
+                    <a class="dropdown-item" href="{% url 'users:employee_messages' pk=user.pk%}">you have{{user.count_unread_messages}}message(s)</a>
+                     <a class="dropdown-item" href="#">My Jobs</a>
+
                     {% if user.get_profile_id%}
                     <a class="dropdown-item" href="{% url 'users:update_profile' pk=user.get_profile_id %}">Update profile</a>
+                    <a class="dropdown-item" href="{% url 'users:password_change' %}">Change password</a>
+
+                     <a class="dropdown-item" href="{% url 'users:my_wish_list' pk=user.id %}">my wish list</a>
+
                     {% endif %}
                     <a class="dropdown-item" href="{% url 'users:logout'%}">Logout</a>
                   </div>
@@ -72,6 +80,8 @@
                     <a class="dropdown-item" href="{% url 'users:employer_jobs'%}">my jobs</a>
                     {% if user.get_profile_id%}
                     <a class="dropdown-item" href="{% url 'users:update_profile' pk=user.get_profile_id %}">update profile</a>
+                    <a class="dropdown-item" href="{% url 'users:password_change' %}">Change password</a>
+
                     {% endif %}
                     <a class="dropdown-item" href="{% url 'users:logout'%}">logout</a>
 
@@ -198,6 +208,10 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{% static "js/google-map.js" %}"></script>
   <script src="{% static "js/main.js" %}"></script>
-
+  {% if user.is_authenticated and user.is_employee%}
+  <script src="{% static "js/addorremove.js" %}"></script>
+  {% else %}
+  <script src="{% static "js/addorremove2.js" %}"></script>
+  {% endif %}
   </body>
 </html>
